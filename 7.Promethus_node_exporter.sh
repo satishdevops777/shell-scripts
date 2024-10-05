@@ -8,7 +8,7 @@ mv node_exporter-${VERSION}.linux-amd64 node_exporter
 cd node_exporter
 sudo cp node_exporter /usr/local/bin/
 
-cat cat <<EOL | sudo tee /etc/systemd/system/node_exporter.service
+cat <<EOL | sudo tee /etc/systemd/system/node_exporter.service
 [Unit]
 Description=Node Exporter
 
