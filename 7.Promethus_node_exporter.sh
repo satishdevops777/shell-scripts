@@ -4,7 +4,7 @@ VERSION="1.8.2"
 
 wget https://github.com/prometheus/node_exporter/releases/download/v${VERSION}/node_exporter-${VERSION}.linux-amd64.tar.gz
 tar -xzf node_exporter-${VERSION}.linux-amd64.tar.gz
-mv node_exporter-${VERSION}.linux-amd64.tar.gz node_exporter
+mv node_exporter-${VERSION}.linux-amd64 node_exporter
 cd node_exporter
 sudo cp node_exporter /usr/local/bin/
 
