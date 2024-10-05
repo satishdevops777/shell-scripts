@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 VERSION="1.8.2"
 
@@ -20,6 +20,7 @@ ExecStart=/usr/local/bin/node_exporter
 WantedBy=default.target
 EOL
 
+#Start service and enable service
 sudo systemctl daemon-reload
 sudo systemctl start node_exporter
 sudo systemctl enable node_exporter
