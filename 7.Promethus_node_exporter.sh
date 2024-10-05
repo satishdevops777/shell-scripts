@@ -8,18 +8,17 @@ mv node_exporter-${VERSION}.linux-amd64.tar.gz node_exporter
 cd node_exporter
 sudo cp node_exporter /usr/local/bin/
 
-cat <<EOT > /etc/systemd/system/node_exporter.service
+cat cat <<EOL | sudo tee /etc/systemd/system/node_exporter.service
+[Unit]
+Description=Node Exporter
 
-  [Unit]
-  Description=Node Exporter
+[Service]
+User=nobody
+ExecStart=/usr/local/bin/node_exporter
 
-  [Service]
-  User=nobody
-  ExecStart=/usr/local/bin/node_exporter
-
-  [Install]
-  WantedBy=default.target
-EOT
+[Install]
+WantedBy=default.target
+EOL
 
 sudo systemctl daemon-reload
 sudo systemctl start node_exporter
