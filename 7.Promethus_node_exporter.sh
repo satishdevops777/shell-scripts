@@ -2,7 +2,7 @@
 
 VERSION="1.8.2"
 
-wget https://github.com/prometheus/node_exporter/releases/download/${VERSION}/node_exporter-${VERSION}.linux-amd64.tar.gz
+wget https://github.com/prometheus/node_exporter/releases/download/v${VERSION}/node_exporter-${VERSION}.linux-amd64.tar.gz
 tar -xzf node_exporter-${VERSION}.linux-amd64.tar.gz
 mv node_exporter-${VERSION}.linux-amd64.tar.gz node_exporter
 cd node_exporter
