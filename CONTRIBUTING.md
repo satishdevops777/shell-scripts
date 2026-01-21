@@ -73,5 +73,111 @@ echo -e "${GREEN}Build successful${RESET}"
 echo -e "${RED}Build failed${RESET}"
 ```
 
+# 🔀 Redirectors in Shell Scripting
+
+In **shell scripting**, **redirectors (I/O redirection)** control **where input comes from** and **where output goes**.  
+By default, commands read input from the keyboard and write output to the terminal, but redirectors allow you to send data to and from **files, devices, or other commands**.
+
+---
+
+## 1️⃣ Standard File Descriptors (FDs)
+
+Every running process has three default file descriptors:
+
+| FD | Name | Description |
+|----|------|-------------|
+| `0` | stdin | Standard input (keyboard) |
+| `1` | stdout | Standard output (terminal) |
+| `2` | stderr | Standard error (terminal) |
+
+Redirectors work by **reassigning these file descriptors**.
+
+---
+
+## 2️⃣ Output Redirection (`>` and `>>`)
+
+### `>` → Redirect stdout (overwrite)
+```bash
+ls > files.txt
+```
+
+### `>>` → Redirect stdout (append)
+```bash
+ls >> files.txt
+```
+
+---
+
+## 3️⃣ Input Redirection (`<`)
+
+```bash
+sort < names.txt
+```
+
+---
+
+## 4️⃣ Error Redirection (`2>` and `2>>`)
+
+```bash
+ls invalid_file 2> error.txt
+```
+
+---
+
+## 5️⃣ Redirect stdout and stderr Together
+
+```bash
+command > all_output.txt 2>&1
+```
+
+---
+
+## 6️⃣ Discard Output (`/dev/null`)
+
+```bash
+command &> /dev/null
+```
+
+---
+
+## 7️⃣ Here Documents (`<<`)
+
+```bash
+cat << EOF
+Hello
+EOF
+```
+
+---
+
+## 8️⃣ Here Strings (`<<<`)
+
+```bash
+grep root <<< "root:x:0:0:/root:/bin/bash"
+```
+
+---
+
+## 9️⃣ Custom File Descriptors
+
+```bash
+exec 3> output.txt
+echo "Hello" >&3
+exec 3>&-
+```
+
+---
+
+## 10️⃣ Common Examples
+
+```bash
+./script.sh > script.log 2>&1
+```
+
+---
+
+## Summary
+
+Redirectors give you **full control over command input and output**, making shell scripts powerful and flexible.
 
 
