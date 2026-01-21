@@ -180,4 +180,239 @@ exec 3>&-
 
 Redirectors give you **full control over command input and output**, making shell scripts powerful and flexible.
 
+# 🧰 Stream Line Editor — `sed`
+
+**`sed` (Stream EDitor)** is a powerful, non-interactive text-processing tool used in shell scripting to **search, find, replace, insert, delete, and transform text** from files or input streams.
+
+It works **line by line** on a stream (file, pipe, or stdin) and outputs the result to **stdout**.
+
+---
+
+## 1️⃣ Why use `sed`?
+
+- Fast and lightweight  
+- Ideal for automation & scripting  
+- Works with pipes  
+- No need to open files interactively  
+- Widely available on Linux/Unix  
+
+### Typical Uses
+- Replace text in logs  
+- Edit configuration files  
+- Extract or delete lines  
+- Format command output  
+
+---
+
+## 2️⃣ Basic Syntax
+
+```bash
+sed [options] 'command' file
+```
+
+Or with a pipe:
+```bash
+command | sed 'command'
+```
+
+---
+
+## 3️⃣ How `sed` Works (Important Concept)
+
+1. Reads one line at a time  
+2. Stores it in the *pattern space*  
+3. Applies the command  
+4. Prints the result (unless suppressed)  
+5. Moves to the next line  
+
+---
+
+## 4️⃣ Most Common `sed` Command — Substitute (`s`)
+
+### Syntax
+```bash
+sed 's/pattern/replacement/flags' file
+```
+
+### Example
+```bash
+sed 's/Linux/UNIX/' file.txt
+```
+✔ Replaces the **first occurrence per line**
+
+### Replace All Occurrences
+```bash
+sed 's/Linux/UNIX/g' file.txt
+```
+
+---
+
+## 5️⃣ Printing vs Modifying Output
+
+By default, `sed` **does not change the file** — it only prints output.
+
+```bash
+sed 's/error/ERROR/' log.txt
+```
+
+### Modify File In-Place
+```bash
+sed -i 's/error/ERROR/' log.txt
+```
+
+### Create Backup Before Editing
+```bash
+sed -i.bak 's/error/ERROR/' log.txt
+```
+
+---
+
+## 6️⃣ Delete Lines (`d`)
+
+### Delete a Specific Line
+```bash
+sed '5d' file.txt
+```
+
+### Delete a Range of Lines
+```bash
+sed '2,5d' file.txt
+```
+
+### Delete Matching Lines
+```bash
+sed '/error/d' file.txt
+```
+
+---
+
+## 7️⃣ Print Specific Lines (`p`)
+
+Use with `-n` (suppresses default printing).
+
+### Print a Single Line
+```bash
+sed -n '3p' file.txt
+```
+
+### Print a Range
+```bash
+sed -n '2,5p' file.txt
+```
+
+### Print Matching Lines
+```bash
+sed -n '/root/p' /etc/passwd
+```
+
+---
+
+## 8️⃣ Insert and Append Text
+
+### Insert Before a Line (`i`)
+```bash
+sed '3i\Inserted line' file.txt
+```
+
+### Append After a Line (`a`)
+```bash
+sed '3a\Appended line' file.txt
+```
+
+---
+
+## 9️⃣ Change Entire Line (`c`)
+
+```bash
+sed '3c\This line is replaced' file.txt
+```
+
+---
+
+## 🔟 Multiple Commands
+
+Using `;`
+```bash
+sed 's/foo/bar/g; s/old/new/g' file.txt
+```
+
+Using `-e`
+```bash
+sed -e 's/foo/bar/' -e 's/old/new/' file.txt
+```
+
+---
+
+## 1️⃣1️⃣ Addressing (Where Commands Apply)
+
+| Address | Meaning |
+|-------|--------|
+| `5` | Line 5 |
+| `2,5` | Line range |
+| `/pattern/` | Matching lines |
+| `$` | Last line |
+
+### Example
+```bash
+sed '/ERROR/s/fail/FAIL/' log.txt
+```
+
+---
+
+## 1️⃣2️⃣ Using `sed` with Pipes
+
+Remove header line:
+```bash
+ps aux | sed '1d'
+```
+
+Remove `%` symbol:
+```bash
+df -h | sed 's/%//g'
+```
+
+---
+
+## 1️⃣3️⃣ Common Real-World Examples
+
+Remove empty lines:
+```bash
+sed '/^$/d' file.txt
+```
+
+Remove comments:
+```bash
+sed '/^#/d' config.conf
+```
+
+Replace tabs with spaces:
+```bash
+sed 's/\t/ /g' file.txt
+```
+
+Add line numbers:
+```bash
+sed = file.txt | sed 'N;s/\n/ /'
+```
+
+---
+
+## 1️⃣4️⃣ `sed` vs `awk`
+
+| Feature | sed | awk |
+|------|-----|-----|
+| Line editing | ✅ | ❌ |
+| Column-based | ❌ | ✅ |
+| Simpler tasks | ✅ | ❌ |
+| Complex logic | ❌ | ✅ |
+
+---
+
+## 📌 One-Line Summary
+
+> `sed` is a **stream-based, non-interactive editor** used to modify and transform text efficiently in shell scripts.
+
+---
+
+⭐ Essential for **Linux**, **DevOps**, **CI/CD pipelines**, and **shell scripting interviews**
 
